@@ -16,8 +16,11 @@ export class SearchComponent {
   public readonly state$: Observable<AppSearchState> = this.appStateService
     .search$;
 
-  addToCollection(post: Post) {
+  addToCollection(post: Post): void {
     this.appStateService.addBookmark(post);
+  }
+  loadMore(): void {
+    this.appStateService.loadMore('search');
   }
 
   constructor(private appStateService: AppStateService) {}

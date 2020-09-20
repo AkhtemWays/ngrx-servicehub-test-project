@@ -42,4 +42,14 @@
       }
     }
   }
+  .search__load-button {
+    background-color: rgba(0, 97, 252, 1);
+    font-size: 20px;
+    transition: all 0.5s ease;
+    border-radius: 7px;
+    border: none;
+    &:hover {
+      background-color: rgba(0, 97, 252, 0.5);
+    }
+  }
 }

@@ -28,4 +28,9 @@ export class AppStateService {
   public removeBookmark(payload: Post): void {
     this.store.dispatch(APP_ACTIONS.removeBookmark({ payload }));
   }
+  public loadMore(component: string) {
+    component === 'search'
+      ? this.store.dispatch(APP_ACTIONS.loadMoreSearchComponent())
+      : this.store.dispatch(APP_ACTIONS.loadMoreBookmarksComponent());
+  }
 }

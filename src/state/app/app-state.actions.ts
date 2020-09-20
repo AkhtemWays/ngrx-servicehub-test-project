@@ -26,9 +26,18 @@ const removeBookmark = createAction(
   props<AppStateRemoveBookmarkPayload>()
 );
 
+const loadMoreSearchComponent = createAction(
+  'APP_STATE/SEARCH_COMPONENT/LOAD_MORE'
+);
+const loadMoreBookmarksComponent = createAction(
+  'APP_STATE/BOOKMARKS_COMPONENT/LOAD_MORE'
+);
+
 export const APP_ACTIONS = {
   setFilter,
   loadSuccess,
   addBookmark,
   removeBookmark,
+  loadMoreSearchComponent,
+  loadMoreBookmarksComponent,
 };

@@ -22,6 +22,9 @@ export class BookmarksComponent {
   removeBookmark(bookmark: Post) {
     this.appStateService.removeBookmark(bookmark);
   }
+  loadMore() {
+    this.appStateService.loadMore('bookmarks');
+  }
 
   constructor(private appStateService: AppStateService) {}
 }

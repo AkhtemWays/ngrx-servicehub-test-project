@@ -14,10 +14,12 @@ const INITIAL_STATE: AppState = {
   search: {
     state: LoadingState.init,
     data: undefined,
+    paginatedData: undefined,
   },
   bookmarks: {
     state: LoadingState.init,
     data: [],
+    paginatedData: [],
   },
 };
 
@@ -39,43 +41,87 @@ export const APP_STATE_REDUCER = createReducer<AppState>(
     (
       state: AppState,
       action: Action & AppStateLoadSuccessPayload
-    ): AppState => ({
-      ...state,
-      search: {
-        state: LoadingState.success,
-        data: action.payload,
-      },
-    })
+    ): AppState => {
+      const paginatedData = action.payload.slice(0, 5);
+      return {
+        ...state,
+        search: {
+          state: LoadingState.success,
+          data: action.payload,
+          paginatedData: [...paginatedData],
+        },
+      };
+    }
   ),
   on(
     APP_ACTIONS.addBookmark,
     (
       state: AppState,
       action: Action & AppStateAddBookmarkPayload
-    ): AppState => ({
-      ...state,
-      bookmarks: {
-        state: LoadingState.init,
-        data: [...state.bookmarks.data, action.payload].filter(
-          (bookmark: Post) =>
-            bookmark.title.includes(state.filter) ||
-            bookmark.body.includes(state.filter)
-        ),
-      },
-    })
+    ): AppState => {
+      const data = [...state.bookmarks.data, action.payload].filter(
+        (bookmark: Post) =>
+          bookmark.title.includes(state.filter) ||
+          bookmark.body.includes(state.filter)
+      );
+      const paginatedData =
+        data.length >= 5 ? data.slice(0, 5) : data.slice(0, data.length);
+      return {
+        ...state,
+        bookmarks: {
+          state: LoadingState.init,
+          data: [...data],
+          paginatedData: [...paginatedData],
+        },
+      };
+    }
   ),
   on(
     APP_ACTIONS.removeBookmark,
     (
       state: AppState,
       action: Action & AppStateRemoveBookmarkPayload
-    ): AppState => ({
+    ): AppState => {
+      const data = state.bookmarks.data.filter(
+        (bookmark) => bookmark.id !== action.payload.id
+      );
+      const paginatedData =
+        data.length >= 5 ? data.slice(0, 5) : data.slice(0, data.length);
+      return {
+        ...state,
+        bookmarks: {
+          state: LoadingState.init,
+          data: [...data],
+          paginatedData: [...paginatedData],
+        },
+      };
+    }
+  ),
+  on(
+    APP_ACTIONS.loadMoreBookmarksComponent,
+    (state: AppState): AppState => ({
       ...state,
       bookmarks: {
         state: LoadingState.init,
-        data: state.bookmarks.data.filter(
-          (bookmark) => bookmark.id !== action.payload.id
+        paginatedData: state.bookmarks.data.slice(
+          0,
+          state.bookmarks.paginatedData.length + 5
         ),
+        data: state.bookmarks.data,
+      },
+    })
+  ),
+  on(
+    APP_ACTIONS.loadMoreSearchComponent,
+    (state: AppState): AppState => ({
+      ...state,
+      search: {
+        state: LoadingState.init,
+        paginatedData: state.search.data.slice(
+          0,
+          state.search.paginatedData.length + 5
+        ),
+        data: state.search.data,
       },
     })
   )
