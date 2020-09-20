@@ -1,0 +1,7 @@
+<ul class="app-tab-navigator__container">
+  <li class="app-tab-navigator__item"
+      *ngFor="let tab of config"
+      routerLinkActive="app-tab-navigator__item_active">
+    <a [routerLink]="tab.route">{{tab.name}}</a>
+  </li>
+</ul>

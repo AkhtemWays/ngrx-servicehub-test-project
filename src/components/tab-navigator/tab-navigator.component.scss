@@ -1,0 +1,20 @@
+.app-tab-navigator__container {
+  list-style: none;
+}
+
+.app-tab-navigator__item {
+  display: inline-block;
+  padding: 20px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  a {
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}
+
+.app-tab-navigator__item:hover,
+.app-tab-navigator__item_active {
+  border-bottom-color: #125699;
+}

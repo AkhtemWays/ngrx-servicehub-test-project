@@ -1,0 +1,21 @@
+<ng-container *ngIf="state$ | async as state">
+  <!-- TODO Реализовать директиву для отображения состояния загрузки (интерфейс LoadableData) -->
+  <div *ngIf="!state.data.length; else data">
+    <h4>You haven't added any bookmark yet</h4>
+  </div>
+  <!-- TODO Реализовать отображение списка загруженных данных -->
+  <!-- TODO Реализовать функцию добавления/исключения в закладки каждого элемента списка -->
+  <ng-template #data>
+    <div class="bookmark-container">
+      <div *ngFor="let post of state.data" class="bookmark-box">
+        <div class="bookmark-box__header">
+          <button (click)="removeBookmark(post)">Remove from collection</button>
+          <h2>{{ post.title }}</h2>
+        </div>
+        <p>{{ post.body }}</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- TODO Реализовать кнопку с функцией загрузить еще -->
+</ng-container>

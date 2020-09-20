@@ -1,0 +1,21 @@
+<ng-container *ngIf="state$ | async as state">
+  <!-- TODO Реализовать директиву для отображения состояния загрузки (интерфейс LoadableData) -->
+  <div *ngIf="state.state === LoadingState.loading; else data">Loading...</div>
+  <!-- TODO Реализовать отображение списка загруженных данных -->
+  <!-- TODO Реализовать функцию добавления/исключения в закладки каждого элемента списка -->
+  <ng-template #data>
+    <div class="post-container">
+      <div *ngFor="let post of state.data" class="post-box">
+        <div class="post-box__header">
+          <button (click)="addToCollection(post)">
+            Add to bookmarks collection
+          </button>
+          <h2>{{ post.title }}</h2>
+        </div>
+        <p>{{ post.body }}</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- TODO Реализовать кнопку с функцией загрузить еще -->
+</ng-container>

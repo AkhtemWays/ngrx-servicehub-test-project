@@ -1,0 +1,9 @@
+Search:
+<input type="text"
+       #input
+       [value]="filter$ | async"
+       (keyup)="setFilter(input.value)">
+
+<app-tab-navigator [config]="navigationConfig"></app-tab-navigator>
+
+<router-outlet></router-outlet>

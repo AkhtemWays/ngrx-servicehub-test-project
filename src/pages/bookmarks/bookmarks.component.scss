@@ -1,0 +1,45 @@
+.bookmark-container {
+  box-sizing: border-box;
+  width: 60%;
+  border: 1px aqua;
+  border-radius: 10px;
+  background-color: rgba(217, 212, 199, 1);
+  padding: 2em auto;
+
+  .bookmark-box {
+    padding: 3em;
+    background-color: rgba(237, 212, 147, 1);
+    transition: all 1s ease;
+    margin: 0.5em auto;
+    border-radius: 30px;
+    &:hover {
+      background-color: rgba(237, 212, 147, 0.5);
+    }
+    h5 {
+      font-weight: 0;
+    }
+    .bookmark-box__header {
+      margin-bottom: 1em;
+
+      h2 {
+        font-weight: bold;
+        font-size: 35px;
+      }
+      button {
+        background-color: rgba(227, 31, 9, 1);
+        float: right;
+        transition: all 0.4s ease;
+        border-radius: 7px;
+        border: none;
+        font-size: 20px;
+        padding: 4px;
+        text-align: center;
+        margin-left: 1em;
+        width: 200px;
+        &:hover {
+          background-color: rgba(227, 31, 9, 0.3);
+        }
+      }
+    }
+  }
+}
